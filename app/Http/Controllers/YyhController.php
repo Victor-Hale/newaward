@@ -9,7 +9,6 @@ use App\Models\Admins;
 use App\Models\Company;
 use App\Models\Competition;
 use App\Models\Sci;
-use App\Models\Teacher;
 use App\Models\Users;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -138,53 +137,41 @@ class YyhController extends Controller
     public function YyhSelectJingsai(Request $request): JsonResponse
     {
 
-        $stateSr = $request['state'];
 
         $id =  $request['form_id'];
-        $state = (int)$stateSr;
-        if ($state == 2){
+
             $data = Competition::Yyhchaxun_a($id);
             if(is_error($data) == true){
                 return json_fail('查询失败',$data,100);
             }else{
                 return json_success('查询成功',$data,200);
             }
-        }
-        return json_fail('查询失败，请查看该项目是否通过',null,101 ) ;
+
 
     }
     public function YyhSelectShuangchuang(Request $request): JsonResponse
     {
 
-        $stateSr = $request['state'];
 
         $id =  $request['form_id'];
-        $state = (int)$stateSr;
-        if ($state == 2){
+
             $data = Company::Yyhchaxun_a($id);
             if(is_error($data) == true){
                 return json_fail('查询失败',$data,100);
             }else{
                 return json_success('查询成功',$data,200);
-            }
-        }
-        return json_fail('查询失败，请查看该项目是否通过',null,101 ) ;
 
-    }
+    }}
     public function YyhSelectSic(Request $request): JsonResponse
     {
-        $stateSr = $request['state'];
+
         $id =  $request['form_id'];
-        $state = (int)$stateSr;
-        if ($state == 2){
             $data = Sci::Yyhchaxun_a($id);
             if(is_error($data) == true){
                 return json_fail('查询失败',$data,100);
             }else{
                 return json_success('查询成功',$data,200);
             }
-        }
-        return json_fail('查询失败，请查看该项目是否通过',null,101 ) ;
 
     }
     public function YyhDeleteJingsai(Request $request): JsonResponse
