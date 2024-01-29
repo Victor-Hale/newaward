@@ -113,5 +113,53 @@ class Competition extends Model
 
     }
 
+    public static function YyhCreate($grade,$major,$class,$stuname,$stuid,$entryname,$signuptime,$url){
+        try {
+
+            $data = Competition::create([
+                'grade' => $grade,
+                'major' => $major,
+                'class' => $class,
+                'stuname' => $stuname,
+                'stuid' => $stuid,
+                'entryname' => $entryname,
+                'signuptime' => $signuptime,
+                'url' => $url,
+            ]);
+            return $data;
+        } catch (Exception $e) {
+            return 'error' . $e->getMessage();
+        }
+
+    }
+
+    public static function YyhSelect($stuid){
+
+        try {
+
+            $data = Competition::where('stuid',$stuid)->get();
+            return $data;
+        } catch (Exception $e) {
+            return 'error' . $e->getMessage();
+        }
+
+    }
+    public static function YyhUpdate($id,$entryname,$signuptime,$url){
+        try {
+
+            $data = Competition::where('id',$id)->update([
+                'entryname' => $entryname,
+                'signuptime' => $signuptime,
+                'url' => $url,
+            ]);
+            return $data;
+        } catch (Exception $e) {
+            return 'error' . $e->getMessage();
+        }
+
+    }
+
+
+
 
 }

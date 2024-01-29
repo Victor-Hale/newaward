@@ -32,8 +32,11 @@ Route::post('register',[YyhController::class,'YyhUserregister']);//注册用户
 Route::post('login',[YyhController::class,'YyhUserLogin']);//登录用户
 Route::post('sendemail',[YyhController::class,'Yyhemail']);//邮箱发送
 
+Route::middleware('jwt.role:users')->prefix('user')->group(function () {
+
 
 Route::middleware('jwt.role:users')->prefix('stu')->group(function () {
+
     Route::post('logoutUser',[YyhController::class,'logoutUser']);//登出用户
     Route::get('getreasonJingsai',[YyhController::class,'YyhSelectJingsai']);//查询竞赛之星
     Route::get('getreasonShuangc',[YyhController::class,'YyhSelectShuangchuang']);//查询双创
@@ -41,6 +44,9 @@ Route::middleware('jwt.role:users')->prefix('stu')->group(function () {
     Route::post('deleteJingsai',[YyhController::class,'YyhDeleteJingsai']);//删除竞赛
     Route::post('deleteShuangc',[YyhController::class,'YyhDeleteShuangchuang']);//删除双创
     Route::post('deleteSic',[YyhController::class,'YyhDeleteSic']);//删除科研
+    Route::get('getcompetition',[YyhController::class,'getcompetition']);//查询竞赛
+    Route::post('submitcompetition',[YyhController::class,'submitcompetition']);//添加竞赛
+    Route::post('editcompetition',[YyhController::class,'editcompetition']);//修改竞赛
 });
 Route::middleware('jwt.role:admins')->prefix('admin')->group(function () {
     Route::post('acceptJingsai',[YyhController::class,'YyhSucceedJingsai']);//审批成功竞赛

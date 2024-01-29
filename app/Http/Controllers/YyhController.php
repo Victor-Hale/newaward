@@ -340,4 +340,50 @@ class YyhController extends Controller
         return json_success("用户退出登录成功",null,200);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * 添加
+     */
+    public function submitcompetition(Request $request){
+        $grade = $request['grade'];
+        $major = $request['major'];
+        $class= $request['class'];
+        $stuname = $request['stuname'];
+        $stuid = $request['stuid'];
+        $entryname = $request['entryname'];
+        $signuptime = $request['signuptime'];
+        $url = $request['url'];
+
+        $data = Competition::YyhCreate($grade,$major,$class,$stuname,$stuid,$entryname,$signuptime,$url);
+        if(is_error($data) == true){
+            return json_fail('添加失败',$data,100);
+        }else{
+            return json_success('添加成功',$data,200);
+        }
+    }
+    public function getcompetition(){
+        $stuid = auth('user')->user()->stuid;
+        $data = Competition::YyhSelect($stuid);
+        if(is_error($data) == true){
+            return json_fail('查询失败',$data,100);
+        }else{
+            return json_success('查询成功',$data,200);
+        }
+    }
+    public function editcompetition(Request $request){
+
+        $id = $request['id'];
+        $entryname = $request['entryname'];
+        $signuptime = $request['signuptime'];
+        $url = $request['url'];
+        $data = Competition::YyhUpdate($id,$entryname,$signuptime,$url);
+        if(is_error($data) == true){
+            return json_fail('修改失败',$data,100);
+        }else{
+            return json_success('修改成功',$data,200);
+        }
+
+    }
+
 }
